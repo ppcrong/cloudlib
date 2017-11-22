@@ -1,6 +1,11 @@
 ext {
     extraLibrary = [
-    // For log (KLog)
-    'com.github.zhaokaiqiang.klog:library:1.6.0'
+            // KLog
+            'com.github.zhaokaiqiang.klog:library:1.6.0',
+            // okhttp
+            'com.squareup.okhttp3:okhttp:3.9.1',
+            // jackson
+            'org.codehaus.jackson:jackson-mapper-asl:1.9.13',
+            'org.codehaus.jackson:jackson-core-asl:1.9.13'
     ]
 }
