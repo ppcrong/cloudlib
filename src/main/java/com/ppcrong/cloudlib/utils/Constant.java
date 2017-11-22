@@ -1,4 +1,4 @@
-package com.ppcrong.cloudlib;
+package com.ppcrong.cloudlib.utils;
 
 public class Constant {
 
