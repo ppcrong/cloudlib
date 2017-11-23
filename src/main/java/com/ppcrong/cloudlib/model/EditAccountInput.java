@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Input JSON for EditAccount
  */
 
-public class EditAccountInput {
+public class EditAccountInput extends JsonBaseObject {
     @JsonProperty("AccountID")
     int AccountID;
     @JsonProperty("Email")

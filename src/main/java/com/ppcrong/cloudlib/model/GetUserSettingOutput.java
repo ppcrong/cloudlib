@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Output JSON for GetUserSetting
  */
 
-public class GetUserSettingOutput {
+public class GetUserSettingOutput extends JsonBaseObject {
     @JsonProperty("UserNO")
     int UserNO;
     @JsonProperty("AccountID")

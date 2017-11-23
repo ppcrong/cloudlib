@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Output JSON for StepAdd
  */
 
-public class StepAddOutput {
+public class StepAddOutput extends JsonBaseObject {
     @JsonProperty("StartTime")
     long StartTime;
     @JsonProperty("ReturnCode")

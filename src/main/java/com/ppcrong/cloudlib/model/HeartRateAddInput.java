@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Input JSON for HeartRateAdd
  */
 
-public class HeartRateAddInput {
+public class HeartRateAddInput extends JsonBaseObject {
     @JsonProperty("AccountID")
     int AccountID;
     @JsonProperty("AccessToken")

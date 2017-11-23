@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Input JSON for UserGoalList
  */
 
-public class UserGoalListInput {
+public class UserGoalListInput extends JsonBaseObject {
     @JsonProperty("AccountID")
     int AccountID;
     @JsonProperty("AccessToken")

@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Output JSON for EditUserSetting
  */
 
-public class EditUserSettingOutput {
+public class EditUserSettingOutput extends JsonBaseObject {
     @JsonProperty("AccountID")
     int AccountID;
     @JsonProperty("ReturnCode")

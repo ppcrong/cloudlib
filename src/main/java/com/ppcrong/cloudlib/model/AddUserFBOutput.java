@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Output JSON for AddUserbyFB
  */
 
-public class AddUserFBOutput {
+public class AddUserFBOutput extends JsonBaseObject {
     @JsonProperty("AccountID")
     int AccountID;
     @JsonProperty("ReturnCode")

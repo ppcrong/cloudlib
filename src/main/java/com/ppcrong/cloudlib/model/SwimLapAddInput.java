@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Input JSON for SwimLapAdd
  */
 
-public class SwimLapAddInput {
+public class SwimLapAddInput extends JsonBaseObject {
     @JsonProperty("AccountID")
     int AccountID;
     @JsonProperty("AccessToken")

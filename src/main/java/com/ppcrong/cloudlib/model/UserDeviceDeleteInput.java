@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Input JSON for UserDeviceDelete
  */
 
-public class UserDeviceDeleteInput {
+public class UserDeviceDeleteInput extends JsonBaseObject {
     @JsonProperty("AccountID")
     int AccountID;
     @JsonProperty("AccessToken")

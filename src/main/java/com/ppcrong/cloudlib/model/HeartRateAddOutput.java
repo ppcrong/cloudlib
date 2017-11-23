@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Output JSON for HeartRateAdd
  */
 
-public class HeartRateAddOutput {
+public class HeartRateAddOutput extends JsonBaseObject {
     @JsonProperty("RecTime")
     long RecTime;
     @JsonProperty("ReturnCode")

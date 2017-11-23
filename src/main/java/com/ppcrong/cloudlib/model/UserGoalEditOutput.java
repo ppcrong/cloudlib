@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Output JSON for UserGoalEdit
  */
 
-public class UserGoalEditOutput {
+public class UserGoalEditOutput extends JsonBaseObject {
     @JsonProperty("AccountID")
     int AccountID;
     @JsonProperty("ReturnCode")

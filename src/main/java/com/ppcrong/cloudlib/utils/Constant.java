@@ -1,6 +1,10 @@
 package com.ppcrong.cloudlib.utils;
 
+import okhttp3.MediaType;
+
 public class Constant {
+
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     public static final String URL_DEMO_SERVER = "http://13.112.57.21/somewherefind/ws/";
     public static final String URL_POSTFIX_ADD_USER = "wsAddUser.php";

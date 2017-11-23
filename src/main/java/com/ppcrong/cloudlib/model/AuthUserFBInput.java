@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Input JSON for AuthUserbyFB
  */
 
-public class AuthUserFBInput {
+public class AuthUserFBInput extends JsonBaseObject {
     @JsonProperty("FBID")
     String FBID;
     @JsonProperty("FBName")

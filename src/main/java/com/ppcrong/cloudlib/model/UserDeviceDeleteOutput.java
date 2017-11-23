@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Output JSON for UserDeviceDelete
  */
 
-public class UserDeviceDeleteOutput {
+public class UserDeviceDeleteOutput extends JsonBaseObject {
     @JsonProperty("AccountID")
     int AccountID;
     @JsonProperty("ReturnCode")

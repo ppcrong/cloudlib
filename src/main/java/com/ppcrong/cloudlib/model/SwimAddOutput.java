@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Output JSON for SwimAdd
  */
 
-public class SwimAddOutput {
+public class SwimAddOutput extends JsonBaseObject {
     @JsonProperty("StartTime")
     long StartTime;
     @JsonProperty("ReturnCode")

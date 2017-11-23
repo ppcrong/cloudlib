@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Input JSON for AddUser
  */
 
-public class AddUserInput {
+public class AddUserInput extends JsonBaseObject {
     @JsonProperty("Email")
     String Email;
     @JsonProperty("Password")

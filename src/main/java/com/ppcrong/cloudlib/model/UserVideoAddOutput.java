@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Output JSON for UserVideoAdd
  */
 
-public class UserVideoAddOutput {
+public class UserVideoAddOutput extends JsonBaseObject {
     @JsonProperty("AccountID")
     int AccountID;
     @JsonProperty("SportID")

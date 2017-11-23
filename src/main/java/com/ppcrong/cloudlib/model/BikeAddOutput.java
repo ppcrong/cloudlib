@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Output JSON for BikeAdd
  */
 
-public class BikeAddOutput {
+public class BikeAddOutput extends JsonBaseObject {
     @JsonProperty("StartTime")
     long StartTime;
     @JsonProperty("ReturnCode")
