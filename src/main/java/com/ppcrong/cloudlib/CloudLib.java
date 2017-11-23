@@ -56,7 +56,7 @@ public class CloudLib {
                 String json = response.body().string();
                 KLog.i("Response json:");
                 KLog.json(json);
-                AddUserOutput output = parseAddUserInput(json);
+                AddUserOutput output = parseAddUserOutput(json);
                 cb.onResponse(output);
             }
 
@@ -68,7 +68,7 @@ public class CloudLib {
         });
     }
 
-    public AddUserOutput parseAddUserInput(String json) {
+    public AddUserOutput parseAddUserOutput(String json) {
 
         AddUserOutput output = null;
         ObjectMapper om = new ObjectMapper();
@@ -112,7 +112,7 @@ public class CloudLib {
                 String json = response.body().string();
                 KLog.i("Response json:");
                 KLog.json(json);
-                AuthUserOutput output = parseAuthUserInput(json);
+                AuthUserOutput output = parseAuthUserOutput(json);
                 cb.onResponse(output);
             }
 
@@ -124,7 +124,7 @@ public class CloudLib {
         });
     }
 
-    public AuthUserOutput parseAuthUserInput(String json) {
+    public AuthUserOutput parseAuthUserOutput(String json) {
 
         AuthUserOutput output = null;
         ObjectMapper om = new ObjectMapper();
