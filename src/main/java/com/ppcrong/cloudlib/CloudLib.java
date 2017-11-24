@@ -29,117 +29,89 @@ import okhttp3.Response;
  */
 public class CloudLib {
 
+    // region [Common]
+    private <IN, OUT> void postJson(String url, IN input, final CloudCallback<OUT> cb, final TypeReference outTypeRef) {
+
+        ObjectMapper om = new ObjectMapper();
+        String json = "";
+        try {
+            json = om.writeValueAsString(input);
+        } catch (Exception e) {
+            KLog.i(Log.getStackTraceString(e));
+        }
+        KLog.i("POST json:");
+        KLog.json(json);
+
+        RequestBody body = RequestBody.create(Constant.JSON, json);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String json = response.body().string();
+                KLog.i("Response json:");
+                KLog.json(json);
+//                OUT output = parseJsonOutput(json, outTypeRef);
+                ArrayList<OUT> outputs = parseJsonOutputs(json, outTypeRef);
+                cb.onResponse(outputs);
+            }
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                KLog.d("addUser onFailure");
+                cb.onFailure();
+            }
+        });
+    }
+
+    private <T> ArrayList<T> parseJsonOutputs(String json, TypeReference outTypeRef) {
+
+        ArrayList<T> outputs = null;
+        ObjectMapper om = new ObjectMapper();
+        try {
+
+            outputs = om.readValue(json, outTypeRef);
+        } catch (IOException e) {
+            KLog.i(Log.getStackTraceString(e));
+        }
+
+        return outputs;
+    }
+
+    private <T> T parseJsonOutput(String json, TypeReference outTypeRef) {
+
+        T output = null;
+        ObjectMapper om = new ObjectMapper();
+        try {
+
+            ArrayList<T> list = om.readValue(json, outTypeRef);
+            output = list.get(0);
+        } catch (IOException e) {
+            KLog.i(Log.getStackTraceString(e));
+        }
+
+        return output;
+    }
+    // endregion [Common]
+
     // region [Account]
-    public void addUser(AddUserInput input, final CloudCallback.AddUserCb cb) {
+    public void addUser(AddUserInput input, final CloudCallback<AddUserOutput> cb) {
 
-        ObjectMapper om = new ObjectMapper();
-        String json = "";
-        try {
-            json = om.writeValueAsString(input);
-        } catch (Exception e) {
-            KLog.i(Log.getStackTraceString(e));
-        }
-        KLog.i("POST json:");
-        KLog.json(json);
-
-        RequestBody body = RequestBody.create(Constant.JSON, json);
-        Request request = new Request.Builder()
-                .url(Constant.URL_ADD_USER)
-                .post(body)
-                .build();
-
-        OkHttpClient client = new OkHttpClient();
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String json = response.body().string();
-                KLog.i("Response json:");
-                KLog.json(json);
-                AddUserOutput output = parseAddUserOutput(json);
-                cb.onResponse(output);
-            }
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                KLog.d("addUser onFailure");
-                cb.onFailure();
-            }
-        });
+        postJson(Constant.URL_ADD_USER, input, cb,
+                new TypeReference<ArrayList<AddUserOutput>>() {
+                });
     }
 
-    public AddUserOutput parseAddUserOutput(String json) {
+    public void authUser(AuthUserInput input, final CloudCallback<AuthUserOutput> cb) {
 
-        AddUserOutput output = null;
-        ObjectMapper om = new ObjectMapper();
-        try {
-
-            ArrayList<AddUserOutput> list =
-                    om.readValue(json,
-                            new TypeReference<List<AddUserOutput>>() {
-                            });
-            output = list.get(0);
-        } catch (IOException e) {
-            KLog.i(Log.getStackTraceString(e));
-        }
-
-        return output;
-    }
-
-    public void authUser(AuthUserInput input, final CloudCallback.AuthUserCb cb) {
-
-        ObjectMapper om = new ObjectMapper();
-        String json = "";
-        try {
-            json = om.writeValueAsString(input);
-        } catch (Exception e) {
-            KLog.i(Log.getStackTraceString(e));
-        }
-        KLog.i("POST json:");
-        KLog.json(json);
-
-        RequestBody body = RequestBody.create(Constant.JSON, json);
-        Request request = new Request.Builder()
-                .url(Constant.URL_AUTH_USER)
-                .post(body)
-                .build();
-
-        OkHttpClient client = new OkHttpClient();
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String json = response.body().string();
-                KLog.i("Response json:");
-                KLog.json(json);
-                AuthUserOutput output = parseAuthUserOutput(json);
-                cb.onResponse(output);
-            }
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                KLog.d("addUser onFailure");
-                cb.onFailure();
-            }
-        });
-    }
-
-    public AuthUserOutput parseAuthUserOutput(String json) {
-
-        AuthUserOutput output = null;
-        ObjectMapper om = new ObjectMapper();
-        try {
-
-            ArrayList<AuthUserOutput> list =
-                    om.readValue(json,
-                            new TypeReference<List<AuthUserOutput>>() {
-                            });
-            output = list.get(0);
-        } catch (IOException e) {
-            KLog.i(Log.getStackTraceString(e));
-        }
-
-        return output;
+        postJson(Constant.URL_AUTH_USER, input, cb,
+                new TypeReference<ArrayList<AuthUserOutput>>() {
+                });
     }
     // endregion [Account]
 
