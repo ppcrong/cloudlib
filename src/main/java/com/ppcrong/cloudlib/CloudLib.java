@@ -109,6 +109,45 @@ public class CloudLib {
         });
     }
 
+    private <IN, OUT> void postJson(String url, ArrayList<IN> inputs, final CloudCallback<OUT> cb, final TypeReference outTypeRef) {
+
+        ObjectMapper om = new ObjectMapper();
+        String json = "";
+        try {
+            json = om.writeValueAsString(inputs);
+        } catch (Exception e) {
+            KLog.i(Log.getStackTraceString(e));
+        }
+        KLog.i("POST json:");
+        KLog.json(json);
+
+        RequestBody body = RequestBody.create(Constant.JSON, json);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String json = response.body().string();
+                KLog.i("Response json:");
+                KLog.json(json);
+//                OUT output = parseJsonOutput(json, outTypeRef);
+                ArrayList<OUT> outputs = parseJsonOutputs(json, outTypeRef);
+                cb.onResponse(outputs);
+            }
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                KLog.d("addUser onFailure");
+                cb.onFailure();
+            }
+        });
+    }
+
     private <T> ArrayList<T> parseJsonOutputs(String json, TypeReference outTypeRef) {
 
         ArrayList<T> outputs = null;
@@ -284,64 +323,64 @@ public class CloudLib {
 
     // region [UploadHistory]
     // region [HR]
-    public void heartRateAdd(HeartRateAddInput input, final CloudCallback<HeartRateAddOutput> cb) {
+    public void heartRateAdd(ArrayList<HeartRateAddInput> inputs, final CloudCallback<HeartRateAddOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_HR_ADD, input, cb,
+        postJson(Constant.URL_HR_ADD, inputs, cb,
                 new TypeReference<ArrayList<HeartRateAddOutput>>() {
                 });
     }
     // endregion [HR]
 
     // region [Sleep]
-    public void sleepAdd(SleepAddInput input, final CloudCallback<SleepAddOutput> cb) {
+    public void sleepAdd(ArrayList<SleepAddInput> inputs, final CloudCallback<SleepAddOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_SLEEP_ADD, input, cb,
+        postJson(Constant.URL_SLEEP_ADD, inputs, cb,
                 new TypeReference<ArrayList<SleepAddOutput>>() {
                 });
     }
     // endregion [Sleep]
 
     // region [Step]
-    public void stepAdd(StepAddInput input, final CloudCallback<StepAddOutput> cb) {
+    public void stepAdd(ArrayList<StepAddInput> inputs, final CloudCallback<StepAddOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_STEP_ADD, input, cb,
+        postJson(Constant.URL_STEP_ADD, inputs, cb,
                 new TypeReference<ArrayList<StepAddOutput>>() {
                 });
     }
     // endregion [Step]
 
     // region [Bike]
-    public void bikeAdd(BikeAddInput input, final CloudCallback<BikeAddOutput> cb) {
+    public void bikeAdd(ArrayList<BikeAddInput> inputs, final CloudCallback<BikeAddOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_BIKE_ADD, input, cb,
+        postJson(Constant.URL_BIKE_ADD, inputs, cb,
                 new TypeReference<ArrayList<BikeAddOutput>>() {
                 });
     }
     // endregion [Bike]
 
     // region [Swim]
-    public void swimAdd(SwimAddInput input, final CloudCallback<SwimAddOutput> cb) {
+    public void swimAdd(ArrayList<SwimAddInput> inputs, final CloudCallback<SwimAddOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_SWIM_ADD, input, cb,
+        postJson(Constant.URL_SWIM_ADD, inputs, cb,
                 new TypeReference<ArrayList<SwimAddOutput>>() {
                 });
     }
 
-    public void swimLapAdd(SwimLapAddInput input, final CloudCallback<SwimLapAddOutput> cb) {
+    public void swimLapAdd(ArrayList<SwimLapAddInput> inputs, final CloudCallback<SwimLapAddOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_SWIM_LAP_ADD, input, cb,
+        postJson(Constant.URL_SWIM_LAP_ADD, inputs, cb,
                 new TypeReference<ArrayList<SwimLapAddOutput>>() {
                 });
     }
