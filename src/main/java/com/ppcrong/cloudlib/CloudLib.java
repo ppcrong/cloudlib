@@ -387,11 +387,11 @@ public class CloudLib {
     // endregion [Swim]
 
     // region [Video]
-    public void userVideoAdd(UserVideoAddInput input, final CloudCallback<UserVideoAddOutput> cb) {
+    public void userVideoAdd(ArrayList<UserVideoAddInput> inputs, final CloudCallback<UserVideoAddOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_USER_VIDEO_ADD, input, cb,
+        postJson(Constant.URL_USER_VIDEO_ADD, inputs, cb,
                 new TypeReference<ArrayList<UserVideoAddOutput>>() {
                 });
     }

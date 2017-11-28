@@ -28,7 +28,7 @@ public class Constant {
     public static final String URL_POSTFIX_BIKE_ADD = "wsBikeAdd.php";
     public static final String URL_POSTFIX_SWIM_ADD = "wsSwimAdd.php";
     public static final String URL_POSTFIX_SWIM_LAP_ADD = "wsSwimLapAdd.php";
-    public static final String URL_POSTFIX_USER_VIDEO_ADD = "wsUserVideoAdd.php";
+    public static final String URL_POSTFIX_USER_VIDEO_ADD = "wsUserVedioAdd.php";
 
     public static final String URL_ADD_USER = URL_DEMO_SERVER + URL_POSTFIX_ADD_USER;
     public static final String URL_ADD_USER_FB = URL_DEMO_SERVER + URL_POSTFIX_ADD_USER_FB;

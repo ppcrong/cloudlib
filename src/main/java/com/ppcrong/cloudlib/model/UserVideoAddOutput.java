@@ -7,8 +7,8 @@ import org.codehaus.jackson.annotate.JsonProperty;
  */
 
 public class UserVideoAddOutput extends JsonBaseObject {
-    @JsonProperty("AccountID")
-    int AccountID;
+    @JsonProperty("StartTime")
+    long StartTime;
     @JsonProperty("SportID")
     String SportID;
     @JsonProperty("ReturnCode")
@@ -19,12 +19,12 @@ public class UserVideoAddOutput extends JsonBaseObject {
     public UserVideoAddOutput() {
     }
 
-    public int getAccountID() {
-        return AccountID;
+    public long getStartTime() {
+        return StartTime;
     }
 
-    public void setAccountID(int accountID) {
-        AccountID = accountID;
+    public void setStartTime(long startTime) {
+        StartTime = startTime;
     }
 
     public String getSportID() {
