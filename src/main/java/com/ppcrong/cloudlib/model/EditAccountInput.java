@@ -11,10 +11,10 @@ public class EditAccountInput extends JsonBaseObject {
     int AccountID;
     @JsonProperty("Email")
     String Email;
-    @JsonProperty("MacAddress")
-    String MacAddress;
-    @JsonProperty("IPAddress")
-    String IPAddress;
+    @JsonProperty("Password")
+    String Password;
+    @JsonProperty("AccessToken")
+    String AccessToken;
 
     public EditAccountInput() {
     }
@@ -35,19 +35,19 @@ public class EditAccountInput extends JsonBaseObject {
         Email = email;
     }
 
-    public String getMacAddress() {
-        return MacAddress;
+    public String getPassword() {
+        return Password;
     }
 
-    public void setMacAddress(String macAddress) {
-        MacAddress = macAddress;
+    public void setPassword(String password) {
+        Password = password;
     }
 
-    public String getIPAddress() {
-        return IPAddress;
+    public String getAccessToken() {
+        return AccessToken;
     }
 
-    public void setIPAddress(String IPAddress) {
-        this.IPAddress = IPAddress;
+    public void setAccessToken(String accessToken) {
+        AccessToken = accessToken;
     }
 }
