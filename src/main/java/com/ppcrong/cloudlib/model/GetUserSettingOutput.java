@@ -33,8 +33,8 @@ public class GetUserSettingOutput extends JsonBaseObject {
     String Twitter;
     @JsonProperty("WeChat")
     String WeChat;
-    @JsonProperty("Youtube")
-    String Youtube;
+    @JsonProperty("YouTube")
+    String YouTube;
     @JsonProperty("StrideLength")
     int StrideLength;
     @JsonProperty("StepGoal")
@@ -159,12 +159,12 @@ public class GetUserSettingOutput extends JsonBaseObject {
         WeChat = weChat;
     }
 
-    public String getYoutube() {
-        return Youtube;
+    public String getYouTube() {
+        return YouTube;
     }
 
-    public void setYoutube(String youtube) {
-        Youtube = youtube;
+    public void setYouTube(String youTube) {
+        YouTube = youTube;
     }
 
     public int getStrideLength() {
