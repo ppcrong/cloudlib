@@ -8,6 +8,8 @@ public class Constant {
 
     public static final String URL_DEMO_SERVER = "http://13.112.57.21/somewherefind/ws/";
     public static final String URL_POSTFIX_ADD_USER = "wsAddUser.php";
+    public static final String URL_POSTFIX_ADD_USER_WITH_MAIL = "wsAddUserWithMail.php";
+    public static final String URL_POSTFIX_RESEND_USER_MAIL = "wsReSendUserMail.php";
     public static final String URL_POSTFIX_ADD_USER_FB = "wsAddUserbyFB.php";
     public static final String URL_POSTFIX_AUTH_USER = "wsAuthUser.php";
     public static final String URL_POSTFIX_AUTH_USER_FB = "wsAuthUserbyFB.php";
@@ -31,6 +33,8 @@ public class Constant {
     public static final String URL_POSTFIX_USER_VIDEO_ADD = "wsUserVideoAdd.php";
 
     public static final String URL_ADD_USER = URL_DEMO_SERVER + URL_POSTFIX_ADD_USER;
+    public static final String URL_ADD_USER_WITH_MAIL = URL_DEMO_SERVER + URL_POSTFIX_ADD_USER_WITH_MAIL;
+    public static final String URL_RESEND_USER_MAIL = URL_DEMO_SERVER + URL_POSTFIX_RESEND_USER_MAIL;
     public static final String URL_ADD_USER_FB = URL_DEMO_SERVER + URL_POSTFIX_ADD_USER_FB;
     public static final String URL_AUTH_USER = URL_DEMO_SERVER + URL_POSTFIX_AUTH_USER;
     public static final String URL_AUTH_USER_FB = URL_DEMO_SERVER + URL_POSTFIX_AUTH_USER_FB;

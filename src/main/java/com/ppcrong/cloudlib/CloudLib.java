@@ -7,6 +7,8 @@ import com.ppcrong.cloudlib.model.AddUserFBInput;
 import com.ppcrong.cloudlib.model.AddUserFBOutput;
 import com.ppcrong.cloudlib.model.AddUserInput;
 import com.ppcrong.cloudlib.model.AddUserOutput;
+import com.ppcrong.cloudlib.model.AddUserWithMailInput;
+import com.ppcrong.cloudlib.model.AddUserWithMailOutput;
 import com.ppcrong.cloudlib.model.AuthUserFBInput;
 import com.ppcrong.cloudlib.model.AuthUserFBOutput;
 import com.ppcrong.cloudlib.model.AuthUserInput;
@@ -23,6 +25,8 @@ import com.ppcrong.cloudlib.model.GetUserSettingInput;
 import com.ppcrong.cloudlib.model.GetUserSettingOutput;
 import com.ppcrong.cloudlib.model.HeartRateAddInput;
 import com.ppcrong.cloudlib.model.HeartRateAddOutput;
+import com.ppcrong.cloudlib.model.ReSendUserMailInput;
+import com.ppcrong.cloudlib.model.ReSendUserMailOutput;
 import com.ppcrong.cloudlib.model.SleepAddInput;
 import com.ppcrong.cloudlib.model.SleepAddOutput;
 import com.ppcrong.cloudlib.model.StepAddInput;
@@ -55,7 +59,6 @@ import org.codehaus.jackson.type.TypeReference;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -185,6 +188,24 @@ public class CloudLib {
 
         postJson(Constant.URL_ADD_USER, input, cb,
                 new TypeReference<ArrayList<AddUserOutput>>() {
+                });
+    }
+
+    public void addUserWithMail(AddUserWithMailInput input, final CloudCallback<AddUserWithMailOutput> cb) {
+
+        KLog.i();
+
+        postJson(Constant.URL_ADD_USER_WITH_MAIL, input, cb,
+                new TypeReference<ArrayList<AddUserWithMailOutput>>() {
+                });
+    }
+
+    public void resendUserMail(ReSendUserMailInput input, final CloudCallback<ReSendUserMailOutput> cb) {
+
+        KLog.i();
+
+        postJson(Constant.URL_RESEND_USER_MAIL, input, cb,
+                new TypeReference<ArrayList<ReSendUserMailOutput>>() {
                 });
     }
 
