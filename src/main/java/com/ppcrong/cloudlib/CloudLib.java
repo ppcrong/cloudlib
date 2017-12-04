@@ -106,8 +106,8 @@ public class CloudLib {
 
             @Override
             public void onFailure(Call call, IOException e) {
-                KLog.d("addUser onFailure");
-                cb.onFailure();
+                KLog.d(Log.getStackTraceString(e));
+                cb.onFailure(e);
             }
         });
     }
@@ -145,8 +145,8 @@ public class CloudLib {
 
             @Override
             public void onFailure(Call call, IOException e) {
-                KLog.d("addUser onFailure");
-                cb.onFailure();
+                KLog.d(Log.getStackTraceString(e));
+                cb.onFailure(e);
             }
         });
     }
