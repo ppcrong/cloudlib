@@ -29,3 +29,11 @@
 
 # jackson
 -dontwarn org.codehaus.jackson.map.ext.**
+-keepattributes *Annotation*,EnclosingMethod,Signature
+-keep class org.codehaus.** { *; }
+-keepclassmembers public final enum org.codehaus.jackson.annotate.JsonAutoDetect$Visibility {
+    public static final org.codehaus.jackson.annotate.JsonAutoDetect$Visibility *; }
+-keep public class com.ppcrong.cloudlib.model.** {
+    public void set*(***);
+    public *** get*();
+}
