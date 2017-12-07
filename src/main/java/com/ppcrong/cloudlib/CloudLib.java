@@ -73,7 +73,61 @@ import okhttp3.Response;
 public class CloudLib {
 
     // region [Common]
-    private <IN, OUT> void postJson(String url, IN input, final CloudCallback<OUT> cb, final TypeReference outTypeRef) {
+    private <IN, OUT> CopyOnWriteArrayList<OUT> postJson(String url, IN input, final TypeReference outTypeRef) throws IOException {
+
+        ObjectMapper om = new ObjectMapper();
+        String json = "";
+        try {
+            json = om.writeValueAsString(input);
+        } catch (Exception e) {
+            KLog.i(Log.getStackTraceString(e));
+        }
+        KLog.i("POST json:");
+        KLog.json(json);
+
+        RequestBody body = RequestBody.create(Constant.JSON, json);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+        Call call = client.newCall(request);
+        Response response = call.execute();
+        String jsonResponse = response.body().string();
+        KLog.i("Response json:");
+        KLog.json(jsonResponse);
+        return parseJsonOutputs(jsonResponse, outTypeRef);
+    }
+
+    private <IN, OUT> CopyOnWriteArrayList<OUT> postJson(String url, CopyOnWriteArrayList<IN> inputs, final TypeReference outTypeRef) throws IOException {
+
+        ObjectMapper om = new ObjectMapper();
+        String json = "";
+        try {
+            json = om.writeValueAsString(inputs);
+        } catch (Exception e) {
+            KLog.i(Log.getStackTraceString(e));
+        }
+        KLog.i("POST json:");
+        KLog.json(json);
+
+        RequestBody body = RequestBody.create(Constant.JSON, json);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+        Call call = client.newCall(request);
+        Response response = call.execute();
+        String jsonResponse = response.body().string();
+        KLog.i("Response json:");
+        KLog.json(jsonResponse);
+        return parseJsonOutputs(jsonResponse, outTypeRef);
+    }
+
+    private <IN, OUT> void postJsonAsync(String url, IN input, final CloudCallback<OUT> cb, final TypeReference outTypeRef) {
 
         ObjectMapper om = new ObjectMapper();
         String json = "";
@@ -112,7 +166,7 @@ public class CloudLib {
         });
     }
 
-    private <IN, OUT> void postJson(String url, CopyOnWriteArrayList<IN> inputs, final CloudCallback<OUT> cb, final TypeReference outTypeRef) {
+    private <IN, OUT> void postJsonAsync(String url, CopyOnWriteArrayList<IN> inputs, final CloudCallback<OUT> cb, final TypeReference outTypeRef) {
 
         ObjectMapper om = new ObjectMapper();
         String json = "";
@@ -182,161 +236,314 @@ public class CloudLib {
     // endregion [Common]
 
     // region [Account]
-    public void addUser(AddUserInput input, final CloudCallback<AddUserOutput> cb) {
+    public CopyOnWriteArrayList<AddUserOutput> addUser(AddUserInput input) throws IOException {
 
         KLog.i();
 
-        postJson(Constant.URL_ADD_USER, input, cb,
+        return postJson(Constant.URL_ADD_USER, input,
                 new TypeReference<CopyOnWriteArrayList<AddUserOutput>>() {
                 });
     }
 
-    public void addUserWithMail(AddUserWithMailInput input, final CloudCallback<AddUserWithMailOutput> cb) {
+    public void addUserAsync(AddUserInput input, final CloudCallback<AddUserOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_ADD_USER_WITH_MAIL, input, cb,
+        postJsonAsync(Constant.URL_ADD_USER, input, cb,
+                new TypeReference<CopyOnWriteArrayList<AddUserOutput>>() {
+                });
+    }
+
+    public CopyOnWriteArrayList<AddUserWithMailOutput> addUserWithMail(AddUserWithMailInput input) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_ADD_USER_WITH_MAIL, input,
                 new TypeReference<CopyOnWriteArrayList<AddUserWithMailOutput>>() {
                 });
     }
 
-    public void resendUserMail(ReSendUserMailInput input, final CloudCallback<ReSendUserMailOutput> cb) {
+    public void addUserWithMailAsync(AddUserWithMailInput input, final CloudCallback<AddUserWithMailOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_RESEND_USER_MAIL, input, cb,
+        postJsonAsync(Constant.URL_ADD_USER_WITH_MAIL, input, cb,
+                new TypeReference<CopyOnWriteArrayList<AddUserWithMailOutput>>() {
+                });
+    }
+
+    public CopyOnWriteArrayList<ReSendUserMailOutput> resendUserMail(ReSendUserMailInput input) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_RESEND_USER_MAIL, input,
                 new TypeReference<CopyOnWriteArrayList<ReSendUserMailOutput>>() {
                 });
     }
 
-    public void addUserFB(AddUserFBInput input, final CloudCallback<AddUserFBOutput> cb) {
+    public void resendUserMailAsync(ReSendUserMailInput input, final CloudCallback<ReSendUserMailOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_ADD_USER_FB, input, cb,
+        postJsonAsync(Constant.URL_RESEND_USER_MAIL, input, cb,
+                new TypeReference<CopyOnWriteArrayList<ReSendUserMailOutput>>() {
+                });
+    }
+
+    public CopyOnWriteArrayList<AddUserFBOutput> addUserFB(AddUserFBInput input) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_ADD_USER_FB, input,
                 new TypeReference<CopyOnWriteArrayList<AddUserFBOutput>>() {
                 });
     }
 
-    public void authUser(AuthUserInput input, final CloudCallback<AuthUserOutput> cb) {
+    public void addUserFBAsync(AddUserFBInput input, final CloudCallback<AddUserFBOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_AUTH_USER, input, cb,
+        postJsonAsync(Constant.URL_ADD_USER_FB, input, cb,
+                new TypeReference<CopyOnWriteArrayList<AddUserFBOutput>>() {
+                });
+    }
+
+    public CopyOnWriteArrayList<AuthUserOutput> authUser(AuthUserInput input) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_AUTH_USER, input,
                 new TypeReference<CopyOnWriteArrayList<AuthUserOutput>>() {
                 });
     }
 
-    public void authUserFB(AuthUserFBInput input, final CloudCallback<AuthUserFBOutput> cb) {
+    public void authUserAsync(AuthUserInput input, final CloudCallback<AuthUserOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_AUTH_USER_FB, input, cb,
+        postJsonAsync(Constant.URL_AUTH_USER, input, cb,
+                new TypeReference<CopyOnWriteArrayList<AuthUserOutput>>() {
+                });
+    }
+
+    public CopyOnWriteArrayList<AuthUserFBOutput> authUserFB(AuthUserFBInput input) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_AUTH_USER_FB, input,
                 new TypeReference<CopyOnWriteArrayList<AuthUserFBOutput>>() {
                 });
     }
 
-    public void editAccount(EditAccountInput input, final CloudCallback<EditAccountOutput> cb) {
+    public void authUserFBAsync(AuthUserFBInput input, final CloudCallback<AuthUserFBOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_EDIT_ACCOUNT, input, cb,
+        postJsonAsync(Constant.URL_AUTH_USER_FB, input, cb,
+                new TypeReference<CopyOnWriteArrayList<AuthUserFBOutput>>() {
+                });
+    }
+
+    public CopyOnWriteArrayList<EditAccountOutput> editAccount(EditAccountInput input) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_EDIT_ACCOUNT, input,
                 new TypeReference<CopyOnWriteArrayList<EditAccountOutput>>() {
                 });
     }
 
-    public void editAccountFB(EditAccountFBInput input, final CloudCallback<EditAccountFBOutput> cb) {
+    public void editAccountAsync(EditAccountInput input, final CloudCallback<EditAccountOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_EDIT_ACCOUNT_FB, input, cb,
+        postJsonAsync(Constant.URL_EDIT_ACCOUNT, input, cb,
+                new TypeReference<CopyOnWriteArrayList<EditAccountOutput>>() {
+                });
+    }
+
+    public CopyOnWriteArrayList<EditAccountFBOutput> editAccountFB(EditAccountFBInput input) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_EDIT_ACCOUNT_FB, input,
+                new TypeReference<CopyOnWriteArrayList<EditAccountFBOutput>>() {
+                });
+    }
+
+    public void editAccountFBAsync(EditAccountFBInput input, final CloudCallback<EditAccountFBOutput> cb) {
+
+        KLog.i();
+
+        postJsonAsync(Constant.URL_EDIT_ACCOUNT_FB, input, cb,
                 new TypeReference<CopyOnWriteArrayList<EditAccountFBOutput>>() {
                 });
     }
     // endregion [Account]
 
     // region [UserSetting]
-    public void getUserSetting(GetUserSettingInput input, final CloudCallback<GetUserSettingOutput> cb) {
+    public CopyOnWriteArrayList<GetUserSettingOutput> getUserSetting(GetUserSettingInput input) throws IOException {
 
         KLog.i();
 
-        postJson(Constant.URL_GET_USER_SETTING, input, cb,
+        return postJson(Constant.URL_GET_USER_SETTING, input,
                 new TypeReference<CopyOnWriteArrayList<GetUserSettingOutput>>() {
                 });
     }
 
-    public void editUserSetting(EditUserSettingInput input, final CloudCallback<EditUserSettingOutput> cb) {
+    public void getUserSettingAsync(GetUserSettingInput input, final CloudCallback<GetUserSettingOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_EDIT_USER_SETTING, input, cb,
+        postJsonAsync(Constant.URL_GET_USER_SETTING, input, cb,
+                new TypeReference<CopyOnWriteArrayList<GetUserSettingOutput>>() {
+                });
+    }
+
+    public CopyOnWriteArrayList<EditUserSettingOutput> editUserSetting(EditUserSettingInput input) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_EDIT_USER_SETTING, input,
+                new TypeReference<CopyOnWriteArrayList<EditUserSettingOutput>>() {
+                });
+    }
+
+    public void editUserSettingAsync(EditUserSettingInput input, final CloudCallback<EditUserSettingOutput> cb) {
+
+        KLog.i();
+
+        postJsonAsync(Constant.URL_EDIT_USER_SETTING, input, cb,
                 new TypeReference<CopyOnWriteArrayList<EditUserSettingOutput>>() {
                 });
     }
     // endregion [UserSetting]
 
     // region [UserDevice]
-    public void userDeviceAdd(UserDeviceAddInput input, final CloudCallback<UserDeviceAddOutput> cb) {
+    public CopyOnWriteArrayList<UserDeviceAddOutput> userDeviceAdd(UserDeviceAddInput input) throws IOException {
 
         KLog.i();
 
-        postJson(Constant.URL_USER_DEVICE_ADD, input, cb,
+        return postJson(Constant.URL_USER_DEVICE_ADD, input,
                 new TypeReference<CopyOnWriteArrayList<UserDeviceAddOutput>>() {
                 });
     }
 
-    public void userDeviceList(UserDeviceListInput input, final CloudCallback<UserDeviceListOutput> cb) {
+    public void userDeviceAddAsync(UserDeviceAddInput input, final CloudCallback<UserDeviceAddOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_USER_DEVICE_LIST, input, cb,
+        postJsonAsync(Constant.URL_USER_DEVICE_ADD, input, cb,
+                new TypeReference<CopyOnWriteArrayList<UserDeviceAddOutput>>() {
+                });
+    }
+
+    public CopyOnWriteArrayList<UserDeviceListOutput> userDeviceList(UserDeviceListInput input) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_USER_DEVICE_LIST, input,
                 new TypeReference<CopyOnWriteArrayList<UserDeviceListOutput>>() {
                 });
     }
 
-    public void userDeviceDelete(UserDeviceDeleteInput input, final CloudCallback<UserDeviceDeleteOutput> cb) {
+    public void userDeviceListAsync(UserDeviceListInput input, final CloudCallback<UserDeviceListOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_USER_DEVICE_DELETE, input, cb,
+        postJsonAsync(Constant.URL_USER_DEVICE_LIST, input, cb,
+                new TypeReference<CopyOnWriteArrayList<UserDeviceListOutput>>() {
+                });
+    }
+
+    public CopyOnWriteArrayList<UserDeviceDeleteOutput> userDeviceDelete(UserDeviceDeleteInput input) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_USER_DEVICE_DELETE, input,
+                new TypeReference<CopyOnWriteArrayList<UserDeviceDeleteOutput>>() {
+                });
+    }
+
+    public void userDeviceDeleteAsync(UserDeviceDeleteInput input, final CloudCallback<UserDeviceDeleteOutput> cb) {
+
+        KLog.i();
+
+        postJsonAsync(Constant.URL_USER_DEVICE_DELETE, input, cb,
                 new TypeReference<CopyOnWriteArrayList<UserDeviceDeleteOutput>>() {
                 });
     }
     // endregion [UserDevice]
 
     // region [UserGoal]
-    public void userGoalAdd(UserGoalAddInput input, final CloudCallback<UserGoalAddOutput> cb) {
+    public CopyOnWriteArrayList<UserGoalAddOutput> userGoalAdd(UserGoalAddInput input) throws IOException {
 
         KLog.i();
 
-        postJson(Constant.URL_USER_GOAL_ADD, input, cb,
+        return postJson(Constant.URL_USER_GOAL_ADD, input,
                 new TypeReference<CopyOnWriteArrayList<UserGoalAddOutput>>() {
                 });
     }
 
-    public void userGoalList(UserGoalListInput input, final CloudCallback<UserGoalListOutput> cb) {
+    public void userGoalAddAsync(UserGoalAddInput input, final CloudCallback<UserGoalAddOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_USER_GOAL_LIST, input, cb,
+        postJsonAsync(Constant.URL_USER_GOAL_ADD, input, cb,
+                new TypeReference<CopyOnWriteArrayList<UserGoalAddOutput>>() {
+                });
+    }
+
+    public CopyOnWriteArrayList<UserGoalListOutput> userGoalList(UserGoalListInput input) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_USER_GOAL_LIST, input,
                 new TypeReference<CopyOnWriteArrayList<UserGoalListOutput>>() {
                 });
     }
 
-    public void userGoalEdit(UserGoalEditInput input, final CloudCallback<UserGoalEditOutput> cb) {
+    public void userGoalListAsync(UserGoalListInput input, final CloudCallback<UserGoalListOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_USER_GOAL_EDIT, input, cb,
+        postJsonAsync(Constant.URL_USER_GOAL_LIST, input, cb,
+                new TypeReference<CopyOnWriteArrayList<UserGoalListOutput>>() {
+                });
+    }
+
+    public CopyOnWriteArrayList<UserGoalEditOutput> userGoalEdit(UserGoalEditInput input) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_USER_GOAL_EDIT, input,
                 new TypeReference<CopyOnWriteArrayList<UserGoalEditOutput>>() {
                 });
     }
 
-    public void userGoalDelete(UserGoalDeleteInput input, final CloudCallback<UserGoalDeleteOutput> cb) {
+    public void userGoalEditAsync(UserGoalEditInput input, final CloudCallback<UserGoalEditOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_USER_GOAL_DELETE, input, cb,
+        postJsonAsync(Constant.URL_USER_GOAL_EDIT, input, cb,
+                new TypeReference<CopyOnWriteArrayList<UserGoalEditOutput>>() {
+                });
+    }
+
+    public CopyOnWriteArrayList<UserGoalDeleteOutput> userGoalDelete(UserGoalDeleteInput input) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_USER_GOAL_DELETE, input,
+                new TypeReference<CopyOnWriteArrayList<UserGoalDeleteOutput>>() {
+                });
+    }
+
+    public void userGoalDeleteAsync(UserGoalDeleteInput input, final CloudCallback<UserGoalDeleteOutput> cb) {
+
+        KLog.i();
+
+        postJsonAsync(Constant.URL_USER_GOAL_DELETE, input, cb,
                 new TypeReference<CopyOnWriteArrayList<UserGoalDeleteOutput>>() {
                 });
     }
@@ -344,75 +551,138 @@ public class CloudLib {
 
     // region [UploadHistory]
     // region [HR]
-    public void heartRateAdd(CopyOnWriteArrayList<HeartRateAddInput> inputs, final CloudCallback<HeartRateAddOutput> cb) {
+    public CopyOnWriteArrayList<HeartRateAddOutput> heartRateAdd(CopyOnWriteArrayList<HeartRateAddInput> inputs) throws IOException {
 
         KLog.i();
 
-        postJson(Constant.URL_HR_ADD, inputs, cb,
+        return postJson(Constant.URL_HR_ADD, inputs,
+                new TypeReference<CopyOnWriteArrayList<HeartRateAddOutput>>() {
+                });
+    }
+
+    public void heartRateAddAsync(CopyOnWriteArrayList<HeartRateAddInput> inputs, final CloudCallback<HeartRateAddOutput> cb) {
+
+        KLog.i();
+
+        postJsonAsync(Constant.URL_HR_ADD, inputs, cb,
                 new TypeReference<CopyOnWriteArrayList<HeartRateAddOutput>>() {
                 });
     }
     // endregion [HR]
 
     // region [Sleep]
-    public void sleepAdd(CopyOnWriteArrayList<SleepAddInput> inputs, final CloudCallback<SleepAddOutput> cb) {
+    public CopyOnWriteArrayList<SleepAddOutput> sleepAdd(CopyOnWriteArrayList<SleepAddInput> inputs) throws IOException {
 
         KLog.i();
 
-        postJson(Constant.URL_SLEEP_ADD, inputs, cb,
+        return postJson(Constant.URL_SLEEP_ADD, inputs,
+                new TypeReference<CopyOnWriteArrayList<SleepAddOutput>>() {
+                });
+    }
+
+    public void sleepAddAsync(CopyOnWriteArrayList<SleepAddInput> inputs, final CloudCallback<SleepAddOutput> cb) {
+
+        KLog.i();
+
+        postJsonAsync(Constant.URL_SLEEP_ADD, inputs, cb,
                 new TypeReference<CopyOnWriteArrayList<SleepAddOutput>>() {
                 });
     }
     // endregion [Sleep]
 
     // region [Step]
-    public void stepAdd(CopyOnWriteArrayList<StepAddInput> inputs, final CloudCallback<StepAddOutput> cb) {
+    public CopyOnWriteArrayList<StepAddOutput> stepAdd(CopyOnWriteArrayList<StepAddInput> inputs) throws IOException {
 
         KLog.i();
 
-        postJson(Constant.URL_STEP_ADD, inputs, cb,
+        return postJson(Constant.URL_STEP_ADD, inputs,
+                new TypeReference<CopyOnWriteArrayList<StepAddOutput>>() {
+                });
+    }
+
+    public void stepAddAsync(CopyOnWriteArrayList<StepAddInput> inputs, final CloudCallback<StepAddOutput> cb) {
+
+        KLog.i();
+
+        postJsonAsync(Constant.URL_STEP_ADD, inputs, cb,
                 new TypeReference<CopyOnWriteArrayList<StepAddOutput>>() {
                 });
     }
     // endregion [Step]
 
     // region [Bike]
-    public void bikeAdd(CopyOnWriteArrayList<BikeAddInput> inputs, final CloudCallback<BikeAddOutput> cb) {
+    public CopyOnWriteArrayList<BikeAddOutput> bikeAdd(CopyOnWriteArrayList<BikeAddInput> inputs) throws IOException {
 
         KLog.i();
 
-        postJson(Constant.URL_BIKE_ADD, inputs, cb,
+        return postJson(Constant.URL_BIKE_ADD, inputs,
+                new TypeReference<CopyOnWriteArrayList<BikeAddOutput>>() {
+                });
+    }
+
+    public void bikeAddAsync(CopyOnWriteArrayList<BikeAddInput> inputs, final CloudCallback<BikeAddOutput> cb) {
+
+        KLog.i();
+
+        postJsonAsync(Constant.URL_BIKE_ADD, inputs, cb,
                 new TypeReference<CopyOnWriteArrayList<BikeAddOutput>>() {
                 });
     }
     // endregion [Bike]
 
     // region [Swim]
-    public void swimAdd(CopyOnWriteArrayList<SwimAddInput> inputs, final CloudCallback<SwimAddOutput> cb) {
+    public CopyOnWriteArrayList<SwimAddOutput> swimAdd(CopyOnWriteArrayList<SwimAddInput> inputs) throws IOException {
 
         KLog.i();
 
-        postJson(Constant.URL_SWIM_ADD, inputs, cb,
+        return postJson(Constant.URL_SWIM_ADD, inputs,
                 new TypeReference<CopyOnWriteArrayList<SwimAddOutput>>() {
                 });
     }
 
-    public void swimLapAdd(CopyOnWriteArrayList<SwimLapAddInput> inputs, final CloudCallback<SwimLapAddOutput> cb) {
+    public void swimAddAsync(CopyOnWriteArrayList<SwimAddInput> inputs, final CloudCallback<SwimAddOutput> cb) {
 
         KLog.i();
 
-        postJson(Constant.URL_SWIM_LAP_ADD, inputs, cb,
+        postJsonAsync(Constant.URL_SWIM_ADD, inputs, cb,
+                new TypeReference<CopyOnWriteArrayList<SwimAddOutput>>() {
+                });
+    }
+
+    public CopyOnWriteArrayList<SwimLapAddOutput> swimLapAdd(CopyOnWriteArrayList<SwimLapAddInput> inputs) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_SWIM_LAP_ADD, inputs,
+                new TypeReference<CopyOnWriteArrayList<SwimLapAddOutput>>() {
+                });
+    }
+
+    public void swimLapAddAsync(CopyOnWriteArrayList<SwimLapAddInput> inputs, final CloudCallback<SwimLapAddOutput> cb) {
+
+        KLog.i();
+
+        postJsonAsync(Constant.URL_SWIM_LAP_ADD, inputs, cb,
                 new TypeReference<CopyOnWriteArrayList<SwimLapAddOutput>>() {
                 });
     }
     // endregion [Swim]
 
     // region [Video]
-    public void userVideoAdd(CopyOnWriteArrayList<UserVideoAddInput> inputs, final CloudCallback<UserVideoAddOutput> cb) {
+    public CopyOnWriteArrayList<UserVideoAddOutput> userVideoAdd(CopyOnWriteArrayList<UserVideoAddInput> inputs) throws IOException {
 
         KLog.i();
 
-        postJson(Constant.URL_USER_VIDEO_ADD, inputs, cb,
+        return postJson(Constant.URL_USER_VIDEO_ADD, inputs,
+                new TypeReference<CopyOnWriteArrayList<UserVideoAddOutput>>() {
+                });
+    }
+
+    public void userVideoAddAsync(CopyOnWriteArrayList<UserVideoAddInput> inputs, final CloudCallback<UserVideoAddOutput> cb) {
+
+        KLog.i();
+
+        postJsonAsync(Constant.URL_USER_VIDEO_ADD, inputs, cb,
                 new TypeReference<CopyOnWriteArrayList<UserVideoAddOutput>>() {
                 });
     }
