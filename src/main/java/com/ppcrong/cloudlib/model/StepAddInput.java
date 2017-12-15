@@ -13,44 +13,12 @@ public class StepAddInput extends JsonBaseObject {
     String AccessToken;
     @JsonProperty("StartTime")
     long StartTime;
-    @JsonProperty("MovingTime")
-    int MovingTime;
-    @JsonProperty("ExecTime")
-    int ExecTime;
+    @JsonProperty("Duration")
+    long Duration;
     @JsonProperty("StepCount")
     int StepCount;
-    @JsonProperty("Splits")
-    int Splits;
-    @JsonProperty("CumulativeTime")
-    int CumulativeTime;
     @JsonProperty("Distance")
     int Distance;
-    @JsonProperty("ElevGain")
-    int ElevGain;
-    @JsonProperty("ElevLoss")
-    int ElevLoss;
-    @JsonProperty("AvgPace")
-    int AvgPace;
-    @JsonProperty("AvgMovingPace")
-    int AvgMovingPace;
-    @JsonProperty("BestPace")
-    int BestPace;
-    @JsonProperty("AvgHR")
-    int AvgHR;
-    @JsonProperty("MaxHR")
-    int MaxHR;
-    @JsonProperty("AvgRunCadence")
-    int AvgRunCadence;
-    @JsonProperty("MaxRunCadence")
-    int MaxRunCadence;
-    @JsonProperty("AvgStrideLength")
-    int AvgStrideLength;
-    @JsonProperty("AvgTemperature")
-    int AvgTemperature;
-    @JsonProperty("LatitudeArray")
-    String LatitudeArray;
-    @JsonProperty("LongtitudeArray")
-    String LongtitudeArray;
     @JsonProperty("StepState")
     int StepState;
     @JsonProperty("Calories")
@@ -85,20 +53,12 @@ public class StepAddInput extends JsonBaseObject {
         StartTime = startTime;
     }
 
-    public int getMovingTime() {
-        return MovingTime;
+    public long getDuration() {
+        return Duration;
     }
 
-    public void setMovingTime(int movingTime) {
-        MovingTime = movingTime;
-    }
-
-    public int getExecTime() {
-        return ExecTime;
-    }
-
-    public void setExecTime(int execTime) {
-        ExecTime = execTime;
+    public void setDuration(long duration) {
+        Duration = duration;
     }
 
     public int getStepCount() {
@@ -109,132 +69,12 @@ public class StepAddInput extends JsonBaseObject {
         StepCount = stepCount;
     }
 
-    public int getSplits() {
-        return Splits;
-    }
-
-    public void setSplits(int splits) {
-        Splits = splits;
-    }
-
-    public int getCumulativeTime() {
-        return CumulativeTime;
-    }
-
-    public void setCumulativeTime(int cumulativeTime) {
-        CumulativeTime = cumulativeTime;
-    }
-
     public int getDistance() {
         return Distance;
     }
 
     public void setDistance(int distance) {
         Distance = distance;
-    }
-
-    public int getElevGain() {
-        return ElevGain;
-    }
-
-    public void setElevGain(int elevGain) {
-        ElevGain = elevGain;
-    }
-
-    public int getElevLoss() {
-        return ElevLoss;
-    }
-
-    public void setElevLoss(int elevLoss) {
-        ElevLoss = elevLoss;
-    }
-
-    public int getAvgPace() {
-        return AvgPace;
-    }
-
-    public void setAvgPace(int avgPace) {
-        AvgPace = avgPace;
-    }
-
-    public int getAvgMovingPace() {
-        return AvgMovingPace;
-    }
-
-    public void setAvgMovingPace(int avgMovingPace) {
-        AvgMovingPace = avgMovingPace;
-    }
-
-    public int getBestPace() {
-        return BestPace;
-    }
-
-    public void setBestPace(int bestPace) {
-        BestPace = bestPace;
-    }
-
-    public int getAvgHR() {
-        return AvgHR;
-    }
-
-    public void setAvgHR(int avgHR) {
-        AvgHR = avgHR;
-    }
-
-    public int getMaxHR() {
-        return MaxHR;
-    }
-
-    public void setMaxHR(int maxHR) {
-        MaxHR = maxHR;
-    }
-
-    public int getAvgRunCadence() {
-        return AvgRunCadence;
-    }
-
-    public void setAvgRunCadence(int avgRunCadence) {
-        AvgRunCadence = avgRunCadence;
-    }
-
-    public int getMaxRunCadence() {
-        return MaxRunCadence;
-    }
-
-    public void setMaxRunCadence(int maxRunCadence) {
-        MaxRunCadence = maxRunCadence;
-    }
-
-    public int getAvgStrideLength() {
-        return AvgStrideLength;
-    }
-
-    public void setAvgStrideLength(int avgStrideLength) {
-        AvgStrideLength = avgStrideLength;
-    }
-
-    public int getAvgTemperature() {
-        return AvgTemperature;
-    }
-
-    public void setAvgTemperature(int avgTemperature) {
-        AvgTemperature = avgTemperature;
-    }
-
-    public String getLatitudeArray() {
-        return LatitudeArray;
-    }
-
-    public void setLatitudeArray(String latitudeArray) {
-        LatitudeArray = latitudeArray;
-    }
-
-    public String getLongtitudeArray() {
-        return LongtitudeArray;
-    }
-
-    public void setLongtitudeArray(String longtitudeArray) {
-        LongtitudeArray = longtitudeArray;
     }
 
     public int getStepState() {

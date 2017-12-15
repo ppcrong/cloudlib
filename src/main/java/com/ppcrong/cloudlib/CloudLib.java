@@ -21,6 +21,8 @@ import com.ppcrong.cloudlib.model.EditAccountInput;
 import com.ppcrong.cloudlib.model.EditAccountOutput;
 import com.ppcrong.cloudlib.model.EditUserSettingInput;
 import com.ppcrong.cloudlib.model.EditUserSettingOutput;
+import com.ppcrong.cloudlib.model.ExerciseAddInput;
+import com.ppcrong.cloudlib.model.ExerciseAddOutput;
 import com.ppcrong.cloudlib.model.GetUserSettingInput;
 import com.ppcrong.cloudlib.model.GetUserSettingOutput;
 import com.ppcrong.cloudlib.model.HeartRateAddInput;
@@ -667,6 +669,26 @@ public class CloudLib {
                 });
     }
     // endregion [Swim]
+
+    // region [Exercise]
+    public CopyOnWriteArrayList<ExerciseAddOutput> exerciseAdd(CopyOnWriteArrayList<ExerciseAddInput> inputs) throws IOException {
+
+        KLog.i();
+
+        return postJson(Constant.URL_EXERCISE_ADD, inputs,
+                new TypeReference<CopyOnWriteArrayList<ExerciseAddOutput>>() {
+                });
+    }
+
+    public void exerciseAddAsync(CopyOnWriteArrayList<ExerciseAddInput> inputs, final CloudCallback<ExerciseAddOutput> cb) {
+
+        KLog.i();
+
+        postJsonAsync(Constant.URL_EXERCISE_ADD, inputs, cb,
+                new TypeReference<CopyOnWriteArrayList<ExerciseAddOutput>>() {
+                });
+    }
+    // endregion [Exercise]
 
     // region [Video]
     public CopyOnWriteArrayList<UserVideoAddOutput> userVideoAdd(CopyOnWriteArrayList<UserVideoAddInput> inputs) throws IOException {

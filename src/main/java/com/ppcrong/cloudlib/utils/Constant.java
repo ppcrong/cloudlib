@@ -29,6 +29,7 @@ public class Constant {
     public static final String URL_POSTFIX_STEP_ADD = "wsStepAdd.php";
     public static final String URL_POSTFIX_BIKE_ADD = "wsBikeAdd.php";
     public static final String URL_POSTFIX_SWIM_ADD = "wsSwimAdd.php";
+    public static final String URL_POSTFIX_EXERCISE_ADD = "wsExerciseAdd.php";
     public static final String URL_POSTFIX_SWIM_LAP_ADD = "wsSwimLapAdd.php";
     public static final String URL_POSTFIX_USER_VIDEO_ADD = "wsUserVideoAdd.php";
 
@@ -55,5 +56,6 @@ public class Constant {
     public static final String URL_BIKE_ADD = URL_DEMO_SERVER + URL_POSTFIX_BIKE_ADD;
     public static final String URL_SWIM_ADD = URL_DEMO_SERVER + URL_POSTFIX_SWIM_ADD;
     public static final String URL_SWIM_LAP_ADD = URL_DEMO_SERVER + URL_POSTFIX_SWIM_LAP_ADD;
+    public static final String URL_EXERCISE_ADD = URL_DEMO_SERVER + URL_POSTFIX_EXERCISE_ADD;
     public static final String URL_USER_VIDEO_ADD = URL_DEMO_SERVER + URL_POSTFIX_USER_VIDEO_ADD;
 }
