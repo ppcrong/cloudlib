@@ -18,7 +18,7 @@ public class StepAddInput extends JsonBaseObject {
     @JsonProperty("StepCount")
     int StepCount;
     @JsonProperty("Distance")
-    int Distance;
+    float Distance;
     @JsonProperty("StepState")
     int StepState;
     @JsonProperty("Calories")
@@ -69,11 +69,11 @@ public class StepAddInput extends JsonBaseObject {
         StepCount = stepCount;
     }
 
-    public int getDistance() {
+    public float getDistance() {
         return Distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(float distance) {
         Distance = distance;
     }
 
