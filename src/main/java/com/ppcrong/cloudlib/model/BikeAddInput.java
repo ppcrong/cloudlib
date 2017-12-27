@@ -22,7 +22,7 @@ public class BikeAddInput extends JsonBaseObject {
     @JsonProperty("MovingTime")
     int MovingTime;
     @JsonProperty("Distance")
-    int Distance;
+    float Distance;
     @JsonProperty("ElevGain")
     int ElevGain;
     @JsonProperty("ElevLoss")
@@ -119,11 +119,11 @@ public class BikeAddInput extends JsonBaseObject {
         MovingTime = movingTime;
     }
 
-    public int getDistance() {
+    public float getDistance() {
         return Distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(float distance) {
         Distance = distance;
     }
 

@@ -24,7 +24,7 @@ public class ExerciseAddInput extends JsonBaseObject {
     @JsonProperty("CumulativeTime")
     int CumulativeTime;
     @JsonProperty("Distance")
-    int Distance;
+    float Distance;
     @JsonProperty("ElevGain")
     int ElevGain;
     @JsonProperty("ElevLoss")
@@ -125,11 +125,11 @@ public class ExerciseAddInput extends JsonBaseObject {
         CumulativeTime = cumulativeTime;
     }
 
-    public int getDistance() {
+    public float getDistance() {
         return Distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(float distance) {
         Distance = distance;
     }
 
