@@ -17,6 +17,8 @@ public class SwimLapAddInput extends JsonBaseObject {
     int Time;
     @JsonProperty("CumulativeTime")
     int CumulativeTime;
+    @JsonProperty("Intervals")
+    int Intervals;
     @JsonProperty("LapNumber")
     int LapNumber;
     @JsonProperty("SwimStroke")
@@ -85,6 +87,14 @@ public class SwimLapAddInput extends JsonBaseObject {
 
     public void setCumulativeTime(int cumulativeTime) {
         CumulativeTime = cumulativeTime;
+    }
+
+    public int getIntervals() {
+        return Intervals;
+    }
+
+    public void setIntervals(int intervals) {
+        Intervals = intervals;
     }
 
     public int getLapNumber() {
