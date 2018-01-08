@@ -8,17 +8,17 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 public class GetUserSettingOutput extends JsonBaseObject {
     @JsonProperty("UserNO")
-    int UserNO;
+    Integer UserNO;
     @JsonProperty("AccountID")
-    int AccountID;
+    Integer AccountID;
     @JsonProperty("UserName")
     String UserName;
     @JsonProperty("UserGender")
     String UserGender;
     @JsonProperty("UserHeight")
-    int UserHeight;
+    Integer UserHeight;
     @JsonProperty("UserWeight")
-    int UserWeight;
+    Integer UserWeight;
     @JsonProperty("BirthdayYear")
     String BirthdayYear;
     @JsonProperty("BirthdayMonth")
@@ -36,9 +36,9 @@ public class GetUserSettingOutput extends JsonBaseObject {
     @JsonProperty("YouTube")
     String YouTube;
     @JsonProperty("StrideLength")
-    int StrideLength;
+    Integer StrideLength;
     @JsonProperty("StepGoal")
-    int StepGoal;
+    Integer StepGoal;
     @JsonProperty("SleepBedHour")
     String SleepBedHour;
     @JsonProperty("SleepBedMinute")
@@ -55,19 +55,19 @@ public class GetUserSettingOutput extends JsonBaseObject {
     public GetUserSettingOutput() {
     }
 
-    public int getUserNO() {
+    public Integer getUserNO() {
         return UserNO;
     }
 
-    public void setUserNO(int userNO) {
+    public void setUserNO(Integer userNO) {
         UserNO = userNO;
     }
 
-    public int getAccountID() {
+    public Integer getAccountID() {
         return AccountID;
     }
 
-    public void setAccountID(int accountID) {
+    public void setAccountID(Integer accountID) {
         AccountID = accountID;
     }
 
@@ -87,19 +87,19 @@ public class GetUserSettingOutput extends JsonBaseObject {
         UserGender = userGender;
     }
 
-    public int getUserHeight() {
+    public Integer getUserHeight() {
         return UserHeight;
     }
 
-    public void setUserHeight(int userHeight) {
+    public void setUserHeight(Integer userHeight) {
         UserHeight = userHeight;
     }
 
-    public int getUserWeight() {
+    public Integer getUserWeight() {
         return UserWeight;
     }
 
-    public void setUserWeight(int userWeight) {
+    public void setUserWeight(Integer userWeight) {
         UserWeight = userWeight;
     }
 
@@ -167,19 +167,19 @@ public class GetUserSettingOutput extends JsonBaseObject {
         YouTube = youTube;
     }
 
-    public int getStrideLength() {
+    public Integer getStrideLength() {
         return StrideLength;
     }
 
-    public void setStrideLength(int strideLength) {
+    public void setStrideLength(Integer strideLength) {
         StrideLength = strideLength;
     }
 
-    public int getStepGoal() {
+    public Integer getStepGoal() {
         return StepGoal;
     }
 
-    public void setStepGoal(int stepGoal) {
+    public void setStepGoal(Integer stepGoal) {
         StepGoal = stepGoal;
     }
 
